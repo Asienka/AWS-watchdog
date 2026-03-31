@@ -1,9 +1,10 @@
 import requests
 import json
+import os
 
 def lambda_handler(event, context):
     # URL to monitor
-    url = "https://www.google.com"
+    url = os.environ.get('TARGET_URL', 'https://www.google.com')
     
     try:
         # 1. Send request

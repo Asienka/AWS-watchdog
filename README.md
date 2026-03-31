@@ -25,7 +25,7 @@ A production-ready, serverless synthetic monitoring tool designed to check websi
 ```text
 ├── .github/workflows/
 │   └── deploy.yml          # GitHub Actions CI/CD workflow
-├── app.py                  # Main Python script (Lambda Handler)
+├── url-monitoring.py       # Main Python script (Lambda Handler)
 ├── Dockerfile              # Docker configuration for AWS Lambda
 ├── requirements.txt        # Python dependencies
 └── README.md               

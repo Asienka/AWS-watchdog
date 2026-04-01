@@ -9,6 +9,7 @@ def lambda_handler(event, context):
     url = os.environ.get('TARGET_URL', 'https://www.google.com')
     sns_topic_arn = os.environ.get('SNS_TOPIC_ARN')
 
+    success = False
     sns_client = boto3.client('sns')
     
 
@@ -20,16 +21,18 @@ def lambda_handler(event, context):
         # 2. Prepare message
         if status == 200:
             message = f"Website {url} is UP (Status: 200)"
+            success = True
         else:
             message = f"Website {url} has ISSUES (Status: {status})"
             
     except Exception as e:
         message = f"ERROR: Could not connect to {url}. Details: {e}"
+        success = False
 
     # 3. Result (see AWS CloudWatch logs)
     print(message)
     
-    if sns_topic_arn:
+    if sns_topic_arn and not success:
         try:
             sns_client.publish(
                 TopicArn=sns_topic_arn,

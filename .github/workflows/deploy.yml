@@ -34,7 +34,6 @@ jobs:
           ruff check .
           ruff format --check .
 
-
   deploy:
     runs-on: ubuntu-latest
 

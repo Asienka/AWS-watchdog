@@ -52,5 +52,5 @@ def lambda_handler(event, context):
         })
     }
 #if __name__ == "__main__":
-    print("Running local test...")
+    #print("Running local test...")
     lambda_handler({}, {})

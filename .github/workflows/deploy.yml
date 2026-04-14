@@ -3,8 +3,38 @@ name: Deploy to AWS Lambda
 on:
   push:
     branches: main
+  pull_request:
+    branches: main
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout 
+      uses: actions/checkout@v6
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform Format check
+      run: terraform fmt -check
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Run Ruff (Python Linting)
+      run: |
+          pip install ruff
+          ruff check .
+          ruff format --check .
+
+
   deploy:
     runs-on: ubuntu-latest
 

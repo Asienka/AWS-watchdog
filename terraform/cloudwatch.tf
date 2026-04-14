@@ -18,7 +18,7 @@ resource "aws_cloudwatch_dashboard" "main" {
             region = var.aws_region,
             title = "Lambda Function Metrics"
             period  = 300
-            }
+            },
         }
         ,
         {

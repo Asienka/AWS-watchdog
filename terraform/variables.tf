@@ -22,5 +22,4 @@ variable "aws_region" {
 variable "sns_alert_email" {
   description = "Address where alerts will be sent"
   type        = string
-  default     = "ulanowska.joanna@gmail.com"
 }

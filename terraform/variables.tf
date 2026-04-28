@@ -22,4 +22,9 @@ variable "aws_region" {
 variable "sns_alert_email" {
   description = "Address where alerts will be sent"
   type        = string
+  sensitive   = true
+}
+variable "ecr_image_uri" {
+  description = "Full image URI with unique GitHub SHA"
+  type        = string
 }

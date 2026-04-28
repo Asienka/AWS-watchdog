@@ -4,7 +4,7 @@ resource "aws_lambda_function" "url_monitor" {
   package_type  = "Image"
   image_uri     = var.ecr_image_uri
   architectures = ["x86_64"]
-  publish = true
+  publish       = true
 
   environment {
     variables = {
@@ -20,5 +20,5 @@ resource "aws_lambda_alias" "live" {
   name             = "live version"
   function_name    = aws_lambda_function.url_monitor.function_name
   function_version = aws_lambda_function.url_monitor.version
-  
+
 }

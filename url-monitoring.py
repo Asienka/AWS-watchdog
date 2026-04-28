@@ -13,11 +13,9 @@ def lambda_handler(event, context):
     sns_client = boto3.client("sns")
 
     try:
-        # 1. Send request
         response = requests.get(url, timeout=5)
         status = response.status_code
 
-        # 2. Prepare message
         if status == 200:
             message = f"Website {url} is UP (Status: 200)"
             success = True
@@ -28,7 +26,6 @@ def lambda_handler(event, context):
         message = f"ERROR: Could not connect to {url}. Details: {e}"
         success = False
 
-    # 3. Result (see AWS CloudWatch logs)
     print(message)
 
     if sns_topic_arn and not success:
@@ -42,7 +39,6 @@ def lambda_handler(event, context):
         except Exception as e:
             print(f"Failed to send SNS alert: {e}")
 
-    # 4. Return the response to AWS Lambda
     return {
         "statusCode": 200,
         "body": json.dumps({"success": success, "message": message}),

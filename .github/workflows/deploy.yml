@@ -25,7 +25,7 @@ jobs:
 
     - name: Terraform Init and Validate
       run: |
-        terraform init =-backend=false
+        terraform init -backend=false
         terraform validate
 
     - name: Set up Python

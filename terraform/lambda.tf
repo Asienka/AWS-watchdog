@@ -7,8 +7,8 @@ resource "aws_lambda_function" "url_monitor" {
 
   environment {
     variables = {
-      
-      TARGET_URL    = var.lambda_target_url 
+
+      TARGET_URL    = var.lambda_target_url
       SNS_TOPIC_ARN = aws_sns_topic.url_monitor_alerts.arn
     }
   }

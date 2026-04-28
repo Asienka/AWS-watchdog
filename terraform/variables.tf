@@ -1,7 +1,7 @@
 variable "lambda_target_url" {
   description = "URL to monitor"
-  type    = string
-  default = "https://www.google.com"
+  type        = string
+  default     = "https://www.google.com"
 }
 variable "lambda_timeout" {
   type    = number

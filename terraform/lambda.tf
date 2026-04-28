@@ -17,7 +17,7 @@ resource "aws_lambda_function" "url_monitor" {
   memory_size = var.lambda_memory
 }
 resource "aws_lambda_alias" "live" {
-  name             = "live version"
+  name             = "live"
   function_name    = aws_lambda_function.url_monitor.function_name
   function_version = aws_lambda_function.url_monitor.version
 

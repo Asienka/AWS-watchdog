@@ -15,3 +15,25 @@ resource "aws_sns_topic_subscription" "email_alert" {
   endpoint  = var.sns_alert_email
 
 }
+
+  resource "aws_ecr_lifecycle_policy" "main_policy" {
+    repository = aws_ecr_repository.url_monitoring_repository.name
+
+    policy = jsonencode({
+    rules = [{
+      rulePriority = 1
+      description  = "Keep only the 5 most recent images to save space"
+      selection = {
+        tagStatus     = "any"
+        countType     = "imageCountMoreThan"
+        countNumber   = 5
+      }
+      action = {
+        type = "expire"
+      }
+    }]
+  })
+}
+  
+
+

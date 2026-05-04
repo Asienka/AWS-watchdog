@@ -36,6 +36,7 @@ data "archive_file" "self_healer_zip" {
   output_path = "${path.module}/self_healer_function.zip"
 }
 resource "aws_lambda_function" "self_healer" {
+  filename         = data.archive_file.self_healer_zip.output_path
   function_name    = "url-monitor-self-healer"
   role             = aws_iam_role.lambda_role.arn
   handler          = "self_healer.lambda_handler"
@@ -47,7 +48,6 @@ resource "aws_lambda_function" "self_healer" {
       LAMBDA_FUNCTION_NAME = aws_lambda_function.url_monitor.function_name
     }
   }
-
 }
 resource "aws_lambda_permission" "sns_invoke_self_healer" {
   statement_id  = "AllowExecutionFromSNSSelfHealer"

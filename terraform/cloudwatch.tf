@@ -43,7 +43,7 @@ resource "aws_cloudwatch_dashboard" "main" {
 
 resource "aws_cloudwatch_metric_alarm" "lambda_error_rate" {
   alarm_name          = "url-monitoring-lambda-error-rate"
-  comparison_operator = "GreaterThanorEqualToThreshold"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
   metric_name         = "Errors"
   namespace           = "AWS/Lambda"

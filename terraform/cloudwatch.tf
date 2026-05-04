@@ -40,3 +40,20 @@ resource "aws_cloudwatch_dashboard" "main" {
     ]
   })
 }
+
+resource "aws_cloudwatch_metric_alarm" "lambda_error_rate" {
+  alarm_name          = "url-monitoring-lambda-error-rate"
+  comparison_operator = "GreaterThanorEqualToThreshold"
+  evaluation_periods  = 1
+  metric_name         = "Errors"
+  namespace           = "AWS/Lambda"
+  period              = 60
+  statistic           = "Sum"
+  threshold           = 1
+  alarm_description   = "Alarm when the Lambda function has errors"
+  dimensions = {
+    FunctionName = aws_lambda_function.url_monitor.function_name
+  }
+  alarm_actions = [aws_sns_topic.url_monitor_alerts.arn]
+
+}

@@ -39,5 +39,26 @@ resource "aws_iam_role_policy" "lambda_policy" {
       }
     ]
   })
+}
+
+resource "aws_iam_role_policy" "lambda_rollback_policy" {
+  name = "url_monitor_lambda_rollback_policy"
+  role = aws_iam_role.lambda_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "lambda:GetAlias",
+          "lambda:UpdateAlias",
+          "lambda:ListVersionsByFunction"
+        ],
+        # Ensure the Lambda function resource exists and is named correctly
+        Resource = "${aws_lambda_function.url_monitor.arn}:*"
+      }
+    ]
+  })
 
 }
